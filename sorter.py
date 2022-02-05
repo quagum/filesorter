@@ -1,6 +1,7 @@
 from distutils.archive_util import make_archive
 import os, shutil 
 
+#wip to make script work on different computers and users
 user = os.getlogin()
 main_dir = r"C:\Users\{}\Downloads".format(user)
 os.chdir(main_dir)
