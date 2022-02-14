@@ -82,6 +82,7 @@ from tkinter import CENTER, filedialog, Text
 
 #creates main window 
 window = tk.Tk()
+window.title("File Sorter")
 canvas = tk.Canvas(window, height = 300, width = 300, bg = "#C2C2C2")
 canvas.pack()
 
