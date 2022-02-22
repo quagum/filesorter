@@ -1,3 +1,46 @@
+#user interface
+import tkinter as tk
+from tkinter import CENTER, filedialog, Text
+
+#creates main window 
+window = tk.Tk()
+window.title("File Sorter")
+canvas = tk.Canvas(window, height = 300, width = 300, bg = "#C2C2C2")
+canvas.pack()
+
+#creates variables for checkbox inputs
+check_for_mp3 = tk.IntVar()
+check_for_pdf = tk.IntVar()
+check_for_jpg = tk.IntVar()
+check_for_png = tk.IntVar()
+check_for_docx = tk.IntVar()
+
+#creates checkboxes
+check_mp3 = tk.Checkbutton(window, text="mp3", variable = check_for_mp3, onvalue = 1, offvalue = 0)
+check_pdf = tk.Checkbutton(window, text="pdf", variable = check_for_pdf, onvalue = 1, offvalue = 0)
+check_jpg = tk.Checkbutton(window, text="jpg", variable = check_for_jpg, onvalue = 1, offvalue = 0)
+check_png = tk.Checkbutton(window, text="png", variable = check_for_png, onvalue = 1, offvalue = 0)
+check_docx = tk.Checkbutton(window, text="docx", variable = check_for_docx, onvalue = 1, offvalue = 0)
+check_mp3.place(x=25,y=200)
+check_pdf.place(x=75,y=200)
+check_jpg.place(x=125,y=200)
+check_png.place(x=175,y=200)
+check_docx.place(x=225,y=200)
+
+#creates sort button 
+sortButton = tk.Button(window, text = "Sort", padx = 10, pady = 10, fg = 'Black', bg = '#C2C2C2', command = sort)
+sortButton.place(relx = 0.5, rely = 0.5, anchor=CENTER)
+
+#creates intake box
+directoryInput = tk.Entry(window)
+canvas.create_window(150, 100, window = directoryInput)
+#takes the inputted 
+directoryWorking = directoryInput.get() 
+
+#runs the tkinter window 
+window.mainloop()
+
+#---------------------------------------------------------------------------------------------------------------
 from distutils.archive_util import make_archive
 import os, shutil 
 
@@ -74,41 +117,3 @@ def sort():
                     destination_path = r"C:\Users\{}\Downloads\docx\{}".format(user, file)
                     print("{} has been moved to docx folder".format(file))
                     shutil.move(source_path, destination_path)
-
-
-#user interface
-import tkinter as tk
-from tkinter import CENTER, filedialog, Text
-
-#creates main window 
-window = tk.Tk()
-window.title("File Sorter")
-canvas = tk.Canvas(window, height = 300, width = 300, bg = "#C2C2C2")
-canvas.pack()
-
-#creates variables for checkbox inputs
-check_for_mp3 = tk.IntVar()
-check_for_pdf = tk.IntVar()
-check_for_jpg = tk.IntVar()
-check_for_png = tk.IntVar()
-check_for_docx = tk.IntVar()
-
-#creates checkboxes
-check_mp3 = tk.Checkbutton(window, text="mp3", variable = check_for_mp3, onvalue = 1, offvalue = 0)
-check_pdf = tk.Checkbutton(window, text="pdf", variable = check_for_pdf, onvalue = 1, offvalue = 0)
-check_jpg = tk.Checkbutton(window, text="jpg", variable = check_for_jpg, onvalue = 1, offvalue = 0)
-check_png = tk.Checkbutton(window, text="png", variable = check_for_png, onvalue = 1, offvalue = 0)
-check_docx = tk.Checkbutton(window, text="docx", variable = check_for_docx, onvalue = 1, offvalue = 0)
-check_mp3.place(x=25,y=200)
-check_pdf.place(x=75,y=200)
-check_jpg.place(x=125,y=200)
-check_png.place(x=175,y=200)
-check_docx.place(x=225,y=200)
-
-#creates sort button 
-sortButton = tk.Button(window, text = "Sort", padx = 10, pady = 10, fg = 'Black', bg = '#C2C2C2', command = sort)
-sortButton.place(relx = 0.5, rely = 0.5, anchor=CENTER)
-
-#runs the tkinter window 
-window.mainloop()
-
