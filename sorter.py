@@ -22,9 +22,9 @@ def sort():
                 if check_for_mp3.get() == 1:
                     #if user checks for mp3 the value of check_for_mp3 = 1
                     #creates folder within working directory if it doesnt exist already for the extension type
-                    move_to_sound_folder_path = r"C:\Users\{}\Downloads\sound".format(user)
-                    if not os.path.exists(move_to_sound_folder_path):
-                        os.makedirs(move_to_sound_folder_path)
+                    sound_folder = r"C:\Users\{}\Downloads\sound".format(user)
+                    if not os.path.exists(sound_folder):
+                        os.makedirs(sound_folder)
                     #location of where the file being worked with is
                     source_path = r"C:\Users\{}\Downloads\{}".format(user, file)
                     #sets the created folder path as the location of where the file is to be moved
@@ -37,42 +37,45 @@ def sort():
                     #checks if keyword is in file title and moves to unique folder from pdf
                     for word in ["css", "fafsa", "tax", "reciept", "wang", "nj", "aid"]:
                         if word in file:
-                            move_to_finance_folder_path = r"C:\Users\{}\Downloads\finance".format(user)
-                            if not os.path.exists(move_to_finance_folder_path):
-                                os.makedirs(move_to_finance_folder_path)
+                            finance_folder = r"C:\Users\{}\Downloads\finance".format(user)
+                            if not os.path.exists(finance_folder):
+                                os.makedirs(finance_folder)
                             source_path = r"C:\Users\{}\Downloads\{}".format(user, file)
                             destination_path = r"C:\Users\{}\Downloads\finance\{}".format(user, file)
                             shutil.move(source_path, destination_path)
                             print("{} has been moved to finance folder".format(file))
                             break 
-                    else:
-                        move_to_pdf_folder_path = r"C:\Users\{}\Downloads\pdf".format(user)
-                        if not os.path.exists(move_to_pdf_folder_path):
-                            os.makedirs(move_to_pdf_folder_path)
-                        source_path = r"C:\Users\{}\Downloads\{}".format(user, file)
-                        destination_path = r"C:\Users\{}\Downloads\pdf\{}".format(user, file)
-                        shutil.move(source_path, destination_path)
-                        print("{} has been moved to pdf folder".format(file))
+                        else:
+                            pdf_folder = r"C:\Users\{}\Downloads\pdf".format(user)
+                            if not os.path.exists(pdf_folder):
+                                os.makedirs(pdf_folder)
+                            source_path = r"C:\Users\{}\Downloads\{}".format(user, file)
+                            destination_path = r"C:\Users\{}\Downloads\pdf\{}".format(user, file)
+                            shutil.move(source_path, destination_path)
+                            print("{} has been moved to pdf folder".format(file))
             case ".jpg":
                 if check_for_jpg.get() == 1: 
-                    move_to_jpg_folder_path = r"C:\Users\{}\Downloads\jpg".format(user)
-                    if not os.path.exists(move_to_jpg_folder_path):
-                        os.makedirs(move_to_jpg_folder_path)
+                    jpg_folder = r"C:\Users\{}\Downloads\jpg".format(user)
+                    if not os.path.exists(jpg_folder):
+                        os.makedirs(jpg_folder)
                     source_path = r"C:\Users\{}\Downloads\{}".format(user, file)
                     destination_path = r"C:\Users\{}\Downloads\jpg\{}".format(user, file)
                     print("{} has been moved to jpg folder".format(file))
                     shutil.move(source_path, destination_path)
             case ".png":
                 if check_for_png.get() == 1:
+                    jpg_folder = r"C:\Users\{}\Downloads\jpg".format(user)
+                    if not os.path.exists(jpg_folder):
+                        os.makedirs(jpg_folder)
                     source_path = r"C:\Users\{}\Downloads\{}".format(user, file)
                     destination_path = r"C:\Users\{}\Downloads\jpg\{}".format(user, file)
                     print("{} has been moved to jpg folder".format(file))
                     shutil.move(source_path, destination_path)
             case ".docx":
                 if check_for_docx.get() == 1:
-                    move_to_docx_folder_path = r"C:\Users\{}\Downloads\docx".format(user)
-                    if not os.path.exists(move_to_docx_folder_path):
-                        os.makedirs(move_to_docx_folder_path)
+                    docx_folder = r"C:\Users\{}\Downloads\docx".format(user)
+                    if not os.path.exists(docx_folder):
+                        os.makedirs(docx_folder)
                     source_path = r"C:\Users\{}\Downloads\{}".format(user, file)
                     destination_path = r"C:\Users\{}\Downloads\docx\{}".format(user, file)
                     print("{} has been moved to docx folder".format(file))
@@ -114,6 +117,9 @@ sortButton.place(relx = 0.5, rely = 0.5, anchor=CENTER)
 #creates intake box
 directoryInput = tk.Entry(window)
 canvas.create_window(150, 100, window = directoryInput)
+
+#what is pushed out ????????????????
+Output = Text(window, height = 5, width = 25, bg = "light cyan")
 
 #runs the tkinter window 
 window.mainloop()
