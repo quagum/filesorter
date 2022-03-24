@@ -6,15 +6,17 @@ def sort():
 
     #gets user and sets the working dir to downloads
     user = os.getlogin()
-    main_dir = r"C:\Users\{}\{}".format(user, directoryInput.get()) 
+    root_dir = r"C:\Users\{}\{}".format(user, directoryInput.get()) 
     #directoryInput.get() instead of variable with the value because the value isn't constantly updated but .get() is
-    
-    os.chdir(main_dir)
+
+    os.chdir(root_dir)
 
     #gets each file in the working dir 
     for file in os.listdir():
         file = file.lower()
         file_extension = os.path.splitext(file)[1]
+
+        source_path = root_dir + "\\" + file
 
         #switch check of the extensions
         match file_extension:
@@ -25,8 +27,6 @@ def sort():
                     sound_folder = r"C:\Users\{}\Downloads\sound".format(user)
                     if not os.path.exists(sound_folder):
                         os.makedirs(sound_folder)
-                    #location of where the file being worked with is
-                    source_path = r"C:\Users\{}\{}\{}".format(user, directoryInput.get(), file)
                     #sets the created folder path as the location of where the file is to be moved
                     destination_path = r"C:\Users\{}\Downloads\sound\{}".format(user, file)
                     print("{} has been moved to sound folder".format(file))
@@ -40,25 +40,21 @@ def sort():
                             finance_folder = r"C:\Users\{}\Downloads\finance".format(user)
                             if not os.path.exists(finance_folder):
                                 os.makedirs(finance_folder)
-                            source_path = r"C:\Users\{}\{}\{}".format(user, directoryInput.get(), file)
                             destination_path = r"C:\Users\{}\Downloads\finance\{}".format(user, file)
                             shutil.move(source_path, destination_path)
                             print("{} has been moved to finance folder".format(file))
                             break 
-                        else:
-                            pdf_folder = r"C:\Users\{}\Downloads\pdf".format(user)
-                            if not os.path.exists(pdf_folder):
-                                os.makedirs(pdf_folder)
-                            source_path = r"C:\Users\{}\{}\{}".format(user, directoryInput.get(), file)
-                            destination_path = r"C:\Users\{}\Downloads\pdf\{}".format(user, file)
-                            shutil.move(source_path, destination_path)
-                            print("{} has been moved to pdf folder".format(file))
+                    pdf_folder = r"C:\Users\{}\Downloads\pdf".format(user)
+                    if not os.path.exists(pdf_folder):
+                        os.makedirs(pdf_folder)
+                    destination_path = r"C:\Users\{}\Downloads\pdf\{}".format(user, file)
+                    shutil.move(source_path, destination_path)
+                    print("{} has been moved to pdf folder".format(file))
             case ".jpg":
                 if check_for_jpg.get() == 1: 
                     jpg_folder = r"C:\Users\{}\Downloads\jpg".format(user)
                     if not os.path.exists(jpg_folder):
                         os.makedirs(jpg_folder)
-                    source_path = r"C:\Users\{}\{}\{}".format(user, directoryInput.get(), file)
                     destination_path = r"C:\Users\{}\Downloads\jpg\{}".format(user, file)
                     print("{} has been moved to jpg folder".format(file))
                     shutil.move(source_path, destination_path)
@@ -67,7 +63,6 @@ def sort():
                     jpg_folder = r"C:\Users\{}\Downloads\jpg".format(user)
                     if not os.path.exists(jpg_folder):
                         os.makedirs(jpg_folder)
-                    source_path = r"C:\Users\{}\{}\{}".format(user, directoryInput.get(), file)
                     destination_path = r"C:\Users\{}\Downloads\jpg\{}".format(user, file)
                     print("{} has been moved to jpg folder".format(file))
                     shutil.move(source_path, destination_path)
@@ -76,7 +71,6 @@ def sort():
                     docx_folder = r"C:\Users\{}\Downloads\docx".format(user)
                     if not os.path.exists(docx_folder):
                         os.makedirs(docx_folder)
-                    source_path = r"C:\Users\{}\{}\{}".format(user, directoryInput.get(), file)
                     destination_path = r"C:\Users\{}\Downloads\docx\{}".format(user, file)
                     print("{} has been moved to docx folder".format(file))
                     shutil.move(source_path, destination_path)
@@ -119,7 +113,8 @@ directoryInput = tk.Entry(window)
 canvas.create_window(150, 100, window = directoryInput)
 
 #what is pushed out ????????????????
-Output = Text(window, height = 5, width = 25, bg = "light cyan")
+output = Text(window, height = 5, width = 25, bg = "light cyan")
+
 
 #runs the tkinter window 
 window.mainloop()
